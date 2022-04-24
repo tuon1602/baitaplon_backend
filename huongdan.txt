@@ -1,0 +1,13 @@
+src: source code
+server.js : chay duoc server
+thu muc:
+    controller:
+    services: choc den database
+    config: cau hinh tham so
+    views: luu tru cac file dung de render
+    public: luu tru can dc public
+    route: khai bao duong link tren server 
+.env : cau hinh tham so moi truong
+.env.example: day len github
+.gitignore: quy dinh nhung j can day len server 
+.babelrc: cau hinh trinh` compliler
