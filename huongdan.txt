@@ -11,3 +11,7 @@ thu muc:
 .env.example: day len github
 .gitignore: quy dinh nhung j can day len server 
 .babelrc: cau hinh trinh` compliler
+
+dùng xampp để kết nối database 
+framework dùng với database: sequelize
+sequelize-cli ( command line interface)
