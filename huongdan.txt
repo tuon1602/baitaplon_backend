@@ -15,3 +15,5 @@ thu muc:
 dùng xampp để kết nối database 
 framework dùng với database: sequelize
 sequelize-cli ( command line interface)
+
+CRUD: create, read, update, delete
