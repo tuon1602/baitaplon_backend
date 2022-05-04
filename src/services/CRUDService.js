@@ -90,14 +90,27 @@ let updateUserData = (data) =>
     {
         try
         {
-            
-            await db.User.update(
+            let user = await db.User.findOne(
                 {
-
+                    where: {id: data.id}
                 })
+                if(user)
+                {
+                    user.firstName = data.firstName
+                    user.lastName= data.lastName
+                    user.address = data.address
+
+                    await user.save()
+                    let allUsers= await db.User.findAll()
+                    resolve(allUsers)
+                }
+                else
+                {
+                    resolve()
+                }
         }catch(e)
         {
-            resolve(e)
+            console.log(e)
         }
     })
 }
