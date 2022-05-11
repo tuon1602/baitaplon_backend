@@ -17,3 +17,17 @@ framework dùng với database: sequelize
 sequelize-cli ( command line interface)
 
 CRUD: create, read, update, delete
+
+
+
+http://localhost:8080/get-crud -> api(là 1 đường link trả lại object)
+object -> JSON
+
+database => data
+
+JSON: chuyển đổi giữ liệu 
+
+check email exist
+compare password
+return userinfo
+access_token ( JWT)
