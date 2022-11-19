@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Get Crud</title>
+</head>
+<body>
+   <table>
+       <tr>
+           <th>Name</th>
+           <th>Description</th>
+           <th>Category</th>
+           <th>Connecting</th>
+       </tr>
+       <tr>
+        <% for(let i=0; i < dataTable.length; i++) { %>
+            <tr>
+              <td><%= dataTable[i].name %></td>
+              <td><%= dataTable[i].description %></td>
+              <td><%= dataTable[i].category %></td>
+              <td><%= dataTable[i].isConnecting %></td>
+              <td>
+                  <a href="/edit-device-crud?id=<%= dataTable[i].id %> " type="button">Edit</a>
+                  <a href="/delete-device-crud?id=<%= dataTable[i].id %>" type="button">Delete</a>
+              </td>
+            </tr>
+         <% } %>
+       </tr>
+   </table>
+</body>
+</html>

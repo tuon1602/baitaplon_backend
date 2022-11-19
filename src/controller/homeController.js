@@ -1,5 +1,7 @@
+import { response } from 'express'
 import db from '../models/index'
 import CRUDService from '../services/CRUDService'
+import CRUDBook from '../services/CRUDBook'
 let getHomePage = async (req,res) =>
 {
     try
@@ -89,8 +91,84 @@ let deleteCRUD= async (req,res)=>
     }
    
 }
+
+//device
+
+let getBookCRUD = (req,res) =>{
+    return res.render('books/createbook.ejs')
+}
+let postBookCRUD = async (req,res) =>{
+    let message = await CRUDBook.createNewBook(req.body)
+    console.log(message)
+    return res.send('post BookCRUD from server')
+}
+
+let getAllBook = async (req,res) =>
+{
+    try
+    {
+        let data = await db.Book.findAll()
+        console.log('-------------------')
+        console.log(data)
+        console.log('-------------------')
+        return res.render(data)
+    }
+    catch(e)
+    {
+        console.log(e)
+    }
+
+  
+}
+// let getAllDevice = async (req,res) =>{
+//     let data = await CRUDServiceDevice.getAllDevice()
+//     return res.render('devices/displaydevices.ejs',{
+//         dataTable:data,
+//     })
+
+// }
+// let getEditDeviceCRUD = async (req,res) =>
+// {
+//     let deviceId = req.query.id
+//     if(deviceId)
+//     {
+//         let deviceData = await CRUDServiceDevice.getDeviceInfoById(deviceId)
+
+//         // let userData
+//        return res.render('devices/editDeviceCRUD.ejs', 
+//     {
+//         device: deviceData,
+//     })
+//     }
+//     else
+//     {
+//         return res.send('device not found')
+//     }
+// }
+// let updateDeviceCRUD = async (req,res) =>{
+//     let data = req.body;
+//     let allDeviceData = await CRUDServiceDevice.updateDeviceData(data)
+//     res.render('devices/displaydevices.ejs',
+//     {dataTable:data
+//     })
+// }
+// let deleteDeviceCRUD= async (req,res)=>
+// {
+//     let id = req.query.id
+//     if(id)
+//     {
+//         await CRUDServiceDevice.deleteDeviceById(id);
+//         return res.send('delete Device succeed')
+//     }
+//     else
+//     {
+//         return res.send('Device not found')
+//     }
+   
+// }
 module.exports = 
 {
+    //users
     getHomePage: getHomePage,
     getAboutPage:getAboutPage,
     getCRUD: getCRUD,
@@ -99,4 +177,13 @@ module.exports =
     getEditCRUD: getEditCRUD,
     putCRUD: putCRUD,
     deleteCRUD: deleteCRUD,
+
+    //devices
+    getBookCRUD:getBookCRUD,
+    postBookCRUD:postBookCRUD,
+    getAllBook:getAllBook,
+    // getAllDevice: getAllDevice,
+    // getEditDeviceCRUD: getEditDeviceCRUD,
+    // updateDeviceCRUD: updateDeviceCRUD,
+    // deleteDeviceCRUD: deleteDeviceCRUD,
 }

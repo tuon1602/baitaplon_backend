@@ -33,7 +33,7 @@ let handleUserLogin = (email, password) =>
                 //compare password
                 let user = await db.User.findOne(
                     {
-                        attributes: ['email','roleId','password'],
+                        attributes: ['email','password'],
                         where: {email : email},
                         raw:true
                     })
@@ -98,6 +98,30 @@ let checkUserEmail = (userEmail) =>
         }
     })
 }
+let checkUserName = (userName)=>{
+    return new Promise(async(resolve,reject)=>
+    {
+        try
+        {
+            let user = await db.User.findOne(
+                {
+                    where: {username: userName}
+                })
+            if(user)
+            {
+                resolve(true)
+            }
+            else 
+            {
+                resolve(false)
+            }
+        }
+        catch(e)
+        {
+            reject(e)
+        }
+    })
+}
 
 let getAllUsers = (userId)=>
 {
@@ -142,13 +166,20 @@ let createNewUser = (data) =>
         try
         {
             let check = await checkUserEmail(data.email)
+            let check2 = await checkUserName(data.username)
             if(check===true)
             {
                 resolve(
                     {
                         errCode:1,
-                        errMessage: "email already use, try another email"
+                        errMessage: "Email already in use"
                     })
+            }
+            if(check2===true){
+                resolve({
+                    errCode:1,
+                    errMessage:"Username already in use"
+                })
             }
             else
             {
@@ -157,12 +188,7 @@ let createNewUser = (data) =>
                     {
                         email:data.email,
                         password:hashPasswordFromBcrypt,
-                        firstName: data.firstName,
-                        lastName: data.lastName,
-                        address: data.address,
-                        gender: data.gender === '1'? true : false,
-                        roleId:data.roleId,
-                        phoneNumber:data.phoneNumber,
+                        username:data.username
                     })
     
                     resolve(

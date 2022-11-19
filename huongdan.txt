@@ -16,7 +16,8 @@ dùng xampp để kết nối database
 framework dùng với database: sequelize
 sequelize-cli ( command line interface)
 
-CRUD: create, read, update, delete
+CRUD: create, read, update, delete\
+
 
 
 
@@ -31,3 +32,7 @@ check email exist
 compare password
 return userinfo
 access_token ( JWT)
+
+
+
+npx sequelize-cli db:migrate tạo bảng 

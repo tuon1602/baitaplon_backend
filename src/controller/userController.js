@@ -45,7 +45,11 @@ let handleGetAllUser = async(req,res)=>
 let handleCreateNewUser = async (req,res) =>
 {
     let message = await userService.createNewUser(req.body)
-    return res.status(200).json(message)
+    return res.status(200).json({
+        errCode:0,
+        errMessage:'ok',
+        message
+    })
 }
 
 let handleDeleteUser = async (req,res) =>
@@ -65,7 +69,7 @@ let handleDeleteUser = async (req,res) =>
 let handleEditUser = async (req,res) => 
 {
     let data = req.body
-    let message = await userService.updateUserData(data)
+    let message = await userService.updateUserData(data)  
     return res.status(200).json(message)
 }
 module.exports = {

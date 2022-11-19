@@ -20,25 +20,24 @@
 <body>
     <div class="container">
         <div class="row">
-            <form action="/post-crud" method="POST">
-                <div class="form-row">
-                    <div class="col-12 mt-3">Create new user</div>
-                    <div class="form-group col-md-6">
-                        <label for="inputEmail4">Email</label>
-                        <input type="email" class="form-control" placeholder="Email" name="email">
-                    </div>
-                    <div class="form-group col-md-6">
-                        <label for="inputPassword4">Password</label>
-                        <input type="password" class="form-control" name="password" placeholder="Password">
-                    </div>
-                </div>
+            <form action="/put-device-crud" method="POST">
+                <div class="col-12 mt-3">Edir device info</div>
                 <div class="form-row">
                     <div class="form-group col-md-6">
-                        <label for="inputEmail4">Username</label>
-                        <input type="text" class="form-control" placeholder="First name" name="username">
+                        <label for="inputEmail4">Name</label>
+                        <input type="text" class="form-control" placeholder="Device name" name="name" value="<%= device.name%>">
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="inputPassword4">Description</label>
+                        <input type="text" class="form-control" name="description" placeholder="Edit your description" value="<%= device.description%>">
                     </div>
                 </div>
-                <button type="submit" class="btn btn-primary">Sign in</button>
+                <div class="form-group">
+                    <label for="inputAddress">Category</label>
+                    <input type="text" class="form-control" name="category" placeholder="category" value="<%= device.category%>">
+                </div>
+                <input type="text" name="id" value="<%= device.id %>" hidden>
+                <button type="submit" class="btn btn-primary">Update</button>
             </form>
         </div>
     </div>
