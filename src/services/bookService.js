@@ -64,7 +64,6 @@ let checkBookName = (bookName) =>
         }
     })
 }
-
 let getAllBooks = () =>{
     return db.Book.findAll()
 }
@@ -83,8 +82,9 @@ let createNewBook = (data) =>
                         errCode:1,
                         errMessage: "This Book exist"
                     })
+                    return 0
             }
-            else
+            if(data.name.trim()!=0 && data.author.trim()!=0  && data.category.trim()!=0 && data.pageCounter.trim()!=0 && data.description.trim()!=0 && data.dateCreated.trim()!=0)
             {
             
                 await db.Book.create(
@@ -94,14 +94,21 @@ let createNewBook = (data) =>
                         description:data.description,
                         category:data.category,
                         pageCounter:data.pageCounter,
-                        image:data.image
+                        image:data.image,
+                        dateCreated:data.dateCreated
                     })
     
                     resolve(
                         {
                             errCode:0,
-                            message:'ok'
+                            errMessage:'ok'
                         })
+            }
+            else{
+                resolve({
+                    errCode:2,
+                    errMessage:'Missing parameters'
+                })
             }
         }catch(e)
         {
@@ -124,7 +131,7 @@ let deleteBook = (bookId) =>
         resolve(
             {
                 errCode:0,
-                message:"user deleted"
+                message:"Book deleted"
             })
     })
 }
@@ -139,8 +146,15 @@ let updateBookData = (data) =>
                 resolve(
                     {
                         errCode:2,
-                        errMessage:"missing parameters"
+                        errMessage:"Missing parameters"
                     })
+            }
+            if(data.name.length==0 || data.author.length==0 || data.category.length==0 || data.pageCounter.length==0 || data.description.length==0 || data.dateCreated.length==0){
+                resolve({
+                    errCode:1,
+                    errMessage:"Missing input parameters"
+                })
+                return false
             }
             let book = await db.Book.findOne(
                 {
@@ -154,12 +168,14 @@ let updateBookData = (data) =>
                 book.description = data.description
                 book.category = data.category
                 book.pageCounter = data.pageCounter
+                book.dateCreated =data.dateCreated
+                book.image = data.image
                 await book.save()
 
                 resolve(
                     {
                         errCode:0,
-                        message:"updated"
+                        errMessage:"updated"
                     })
             }
             else
@@ -167,7 +183,7 @@ let updateBookData = (data) =>
                 resolve(
                     {
                         errCode:1,
-                        errMessage:"book not found"
+                        errMessage:"Book not found"
                     })
             }
         }

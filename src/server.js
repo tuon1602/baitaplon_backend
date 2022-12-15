@@ -4,15 +4,16 @@ import viewEngine from "./config/viewEngine"
 import initWebRoutes from "./route/web"
 import connectDB from "./config/connectDB"
 import cors from 'cors'
+import compression from 'compression'
 require('dotenv').config()
 
 let app = express()
 
 //config app
 app.use(cors({origin: true}))
-app.use(bodyParser.json())
-app.use(bodyParser.urlencoded({extended: true}))
-
+app.use(bodyParser.json({limit:'50mb'}))
+app.use(bodyParser.urlencoded({extended: false,limit:'50mb'}))
+app.use(compression())
 
 let port = process.env.PORT || 6969
 

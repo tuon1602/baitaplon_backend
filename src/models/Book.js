@@ -11,15 +11,16 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      Book.hasMany(models.Cart,{foreignKey:"bookId"})
     }
   };
   Book.init({ 
     name: DataTypes.STRING,
     author: DataTypes.STRING,
-    description: DataTypes.STRING,
+    description: DataTypes.TEXT('long'),
     category: DataTypes.STRING,
-    pageCounter: DataTypes.INTEGER,
-
+    pageCounter: DataTypes.STRING,
+    dateCreated:DataTypes.STRING,
     // email:DataTypes.STRING,
     // password:DataTypes.STRING,
     // firstName: DataTypes.STRING,
@@ -29,7 +30,7 @@ module.exports = (sequelize, DataTypes) => {
     // roleId:DataTypes.STRING,
     // phoneNumber:DataTypes.STRING,
     // positionId:DataTypes.STRING,
-    image: DataTypes.STRING
+    image: DataTypes.TEXT('long')
   }, {
     sequelize,
     modelName: 'Book',

@@ -21,7 +21,32 @@ let handleLogin = async (req,res) =>
             user: userData.user ? userData.user : {}
         })
 }
+let handleGetUser = async (req,res)=>{
+    let email = req.query.email
+    let user = await userService.getUser(email)
+    console.log(email)
+    return res.status(200).json({
+        errCode:0,
+        errMessage:"ok",
+        user
 
+    })
+    console.log(user)
+
+}
+let handleGetUserById = async (req,res)=>{
+    let id = req.query.id
+    let user = await userService.getUserById(id)
+    console.log(id)
+    return res.status(200).json({
+        errCode:0,
+        errMessage:"ok",
+        user
+
+    })
+    console.log(user)
+
+}
 let handleGetAllUser = async(req,res)=>
 {
     let id= req.query.id
@@ -46,8 +71,6 @@ let handleCreateNewUser = async (req,res) =>
 {
     let message = await userService.createNewUser(req.body)
     return res.status(200).json({
-        errCode:0,
-        errMessage:'ok',
         message
     })
 }
@@ -77,5 +100,7 @@ module.exports = {
     handleGetAllUser: handleGetAllUser,
     handleCreateNewUser: handleCreateNewUser,
     handleEditUser:handleEditUser,
-    handleDeleteUser:handleDeleteUser
+    handleDeleteUser:handleDeleteUser,
+    handleGetUser:handleGetUser,
+    handleGetUserById:handleGetUserById
 }
