@@ -185,14 +185,14 @@ let createNewUser = (data) => {
         return false
 
       }
-      if (check3 === true) {
-        resolve({
-          errCode: 1,
-          errMessage: "Please select role",
-        });
-        return false
+      // if (check3 === true) {
+      //   resolve({
+      //     errCode: 1,
+      //     errMessage: "Please select role",
+      //   });
+      //   return false
 
-      }
+      // }
       else {
         let hashPasswordFromBcrypt = await hashUserPassword(data.password);
         await db.User.create({

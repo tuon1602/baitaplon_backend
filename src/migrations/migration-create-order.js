@@ -15,10 +15,10 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      bookOrder:{
-        type:Sequelize.STRING
+      bookId:{
+        type:Sequelize.JSON
       },
-      amountOrder:{
+      amount:{
         type:Sequelize.INTEGER
       },
       userId:{

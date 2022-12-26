@@ -4,6 +4,7 @@ import userController from "../controller/userController"
 import bookController from '../controller/bookController'
 import CartController from '../controller/CartController'
 import CommentController from '../controller/CommentController'
+import OrderController from '../controller/OrderController'
 
 let router = express.Router();
 
@@ -27,6 +28,7 @@ let initWebRoutes = (app) =>
     // router.post('/put-device-crud', homeController.updateDeviceCRUD)
     // router.get('/delete-device-crud',homeController.deleteDeviceCRUD)
 
+    //user
     router.post('/api/login', userController.handleLogin)
     router.get('/api/get-user-by-id',userController.handleGetUserById)
     router.get('/api/get-all-users', userController.handleGetAllUser)
@@ -35,6 +37,7 @@ let initWebRoutes = (app) =>
     router.put('/api/edit-user', userController.handleEditUser)
     router.delete('/api/delete-user', userController.handleDeleteUser) //restapi
     
+    //book
     router.get('/api/get-all-books',bookController.handleGetAllBook)
     router.post('/api/create-new-book',bookController.handleCreateNewBook)
     router.delete('/api/delete-book/',bookController.handleDeleteBook)
@@ -47,7 +50,12 @@ let initWebRoutes = (app) =>
     //comment
     router.post('/api/post-comment',CommentController.handleCreateComment)
     router.get('/api/get-all-comment',CommentController.handleGetAllComment)
-    
+    //buy
+    router.post('/api/post-order',OrderController.handleCreateNewOrder)
+    router.get('/api/get-all-order',OrderController.handleGetAllOrder)
+    router.delete('/api/delete-carts-when-navigate',OrderController.handleDeleteCartWhenNavigate)
+    router.get('/api/get-book-by-orderid',OrderController.handleGetAllBook)
+    router.put('/api/update-status',OrderController.handleUpdateStatus)
     //rest api method : get
     return app.use("/",router)
 }
